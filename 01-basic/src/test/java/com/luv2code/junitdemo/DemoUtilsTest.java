@@ -2,6 +2,8 @@ package com.luv2code.junitdemo;
 
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 // @DisplayNameGeneration(DisplayNameGenerator.Simple.class) // create name automatically by removing parentheses of methods
@@ -64,5 +66,13 @@ class DemoUtilsTest {
         String[] myChars = {"A", "B", "C"};
 
         assertArrayEquals(myChars, demoUtils.getFirstThreeLettersOfAlphabet(), "Arrays should be the same");
+    }
+
+    @Test
+    @DisplayName("Iterable equal") // test ArrayList, HashSet, HasMap... of Collection
+    void getAcademyInList() {
+        List<String> myList = List.of("luv", "2", "code");
+
+        assertIterableEquals(myList, demoUtils.getAcademyInList(), "Lists should be the same");
     }
 }
