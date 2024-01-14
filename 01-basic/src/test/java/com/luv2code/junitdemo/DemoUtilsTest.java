@@ -10,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 // @DisplayNameGeneration(DisplayNameGenerator.Simple.class) // create name automatically by removing parentheses of methods
 @DisplayNameGeneration(DisplayNameGenerator.IndicativeSentences.class) // auto create displayed name with <DemoUtilsTest> <methods name>
 //@TestMethodOrder(MethodOrderer.DisplayName.class) // run test case order by displayed name
-@TestMethodOrder(MethodOrderer.MethodName.class) // run test case order by method name
+//@TestMethodOrder(MethodOrderer.MethodName.class) // run test case order by method name
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // run test case order by @Order. small num run first
 class DemoUtilsTest {
     DemoUtils demoUtils;
 
@@ -20,7 +21,8 @@ class DemoUtilsTest {
     }
 
     @Test
-//    @DisplayName("Equal or Not Equal") // configure name displayed
+    @DisplayName("Equal or Not Equal") // configure name displayed
+    @Order(1)
     void add() {
         // when
         int expected = 6;
@@ -32,7 +34,8 @@ class DemoUtilsTest {
     }
 
     @Test
-//    @DisplayName("Null or Not Null") // configure name displayed
+    @DisplayName("Null or Not Null") // configure name displayed
+    @Order(3)
     void checkNull() {
         // when
         String str1 = null;
@@ -45,6 +48,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Same or Not Same")
+    @Order(2)
     void sameOrNotSame() { // test if referring to the same obj or not
         String str1 = "luv2code";
 
@@ -54,6 +58,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Test true false")
+    @Order(5)
     void isGreater() {
         int num1 = 9;
         int num2 = 5;
@@ -65,6 +70,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Arrays equals") // compare arrays
+    @Order(4)
     void getFirstThreeLettersOfAlphabet() {
         String[] myChars = {"A", "B", "C"};
 
@@ -73,6 +79,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Iterable equal") // test ArrayList, HashSet, HasMap... of Collection
+    @Order(6)
     void getAcademyInList() {
         List<String> myList = List.of("luv", "2", "code");
 
@@ -81,6 +88,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Lines match") // compare both list of strings match
+    @Order(7)
     void testLinesMatch() {
         List<String> myList = List.of("luv", "2", "code");
 
@@ -89,6 +97,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Throws or Not throws")
+    @Order(8)
     void throwException() {
         int validNum = 5;
         int invalidNum = -1;
@@ -99,6 +108,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Timeout")
+    @Order(9)
     void checkTimeout() {
         assertTimeout(Duration.ofSeconds(3), () -> {demoUtils.checkTimeout();}, "Method should execute in 3 seconds");
     }
