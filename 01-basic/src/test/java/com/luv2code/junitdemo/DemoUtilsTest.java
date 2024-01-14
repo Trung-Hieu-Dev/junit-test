@@ -83,4 +83,14 @@ class DemoUtilsTest {
 
         assertLinesMatch(myList, demoUtils.getAcademyInList(), "Lists should be the same");
     }
+
+    @Test
+    @DisplayName("Throws or Not throws")
+    void throwException() {
+        int validNum = 5;
+        int invalidNum = -1;
+
+        assertThrows(Exception.class, () -> {demoUtils.throwException(invalidNum);}, "Should throw exception");
+        assertDoesNotThrow(() -> {demoUtils.throwException(validNum);}, "Should not throw exception");
+    }
 }
