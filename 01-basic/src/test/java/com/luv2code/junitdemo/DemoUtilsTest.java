@@ -4,7 +4,8 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayNameGeneration(DisplayNameGenerator.Simple.class) // create name automatically by removing parentheses of methods
+// @DisplayNameGeneration(DisplayNameGenerator.Simple.class) // create name automatically by removing parentheses of methods
+@DisplayNameGeneration(DisplayNameGenerator.IndicativeSentences.class) // auto create displayed name with <DemoUtilsTest> <methods name>
 class DemoUtilsTest {
     DemoUtils demoUtils;
 
