@@ -1,6 +1,7 @@
 package com.luv2code.junitdemo;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +15,7 @@ class DemoUtilsTest {
     }
 
     @Test
+    @DisplayName("Equal or Not Equal")
     void add() {
         // given
 //        DemoUtils demoUtils = new DemoUtils();
@@ -28,6 +30,7 @@ class DemoUtilsTest {
     }
 
     @Test
+    @DisplayName("Null or Not Null")
     void checkNull() {
         // given
 //        DemoUtils demoUtils = new DemoUtils();
