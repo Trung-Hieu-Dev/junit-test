@@ -75,4 +75,12 @@ class DemoUtilsTest {
 
         assertIterableEquals(myList, demoUtils.getAcademyInList(), "Lists should be the same");
     }
+
+    @Test
+    @DisplayName("Lines match") // compare both list of strings match
+    void testLinesMatch() {
+        List<String> myList = List.of("luv", "2", "code");
+
+        assertLinesMatch(myList, demoUtils.getAcademyInList(), "Lists should be the same");
+    }
 }
