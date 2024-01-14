@@ -37,4 +37,13 @@ class DemoUtilsTest {
         assertNull(demoUtils.checkNull(str1), "Obj is null");
         assertNotNull(demoUtils.checkNull(str2), "Obj is not null");
     }
+
+    @Test
+    @DisplayName("Same or Not Same")
+    void sameOrNotSame() { // test if referring to the same obj or not
+        String str1 = "luv2code";
+
+        assertSame(demoUtils.getAcademy(), demoUtils.getAcademyDuplicate(), "Refer to the same obj");
+        assertNotSame(str1, demoUtils.getAcademy(), "Not referring to the same obj");
+    }
 }
