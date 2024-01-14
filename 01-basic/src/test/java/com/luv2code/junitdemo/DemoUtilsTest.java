@@ -1,11 +1,10 @@
 package com.luv2code.junitdemo;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayNameGeneration(DisplayNameGenerator.Simple.class) // create name automatically by removing parentheses of methods
 class DemoUtilsTest {
     DemoUtils demoUtils;
 
@@ -15,11 +14,8 @@ class DemoUtilsTest {
     }
 
     @Test
-    @DisplayName("Equal or Not Equal")
+//    @DisplayName("Equal or Not Equal") // configure name displayed
     void add() {
-        // given
-//        DemoUtils demoUtils = new DemoUtils();
-
         // when
         int expected = 6;
         int unexpected = 10;
@@ -30,11 +26,8 @@ class DemoUtilsTest {
     }
 
     @Test
-    @DisplayName("Null or Not Null")
+//    @DisplayName("Null or Not Null") // configure name displayed
     void checkNull() {
-        // given
-//        DemoUtils demoUtils = new DemoUtils();
-
         // when
         String str1 = null;
         String str2 = "Hello World";
