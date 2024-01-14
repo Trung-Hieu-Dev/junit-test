@@ -1,15 +1,22 @@
 package com.luv2code.junitdemo;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DemoUtilsTest {
+    DemoUtils demoUtils;
+
+    @BeforeEach
+    void setUpBeforeEach() { // run before every method in this test class
+        this.demoUtils = new DemoUtils();
+    }
 
     @Test
     void add() {
         // given
-        DemoUtils demoUtils = new DemoUtils();
+//        DemoUtils demoUtils = new DemoUtils();
 
         // when
         int expected = 6;
@@ -23,7 +30,7 @@ class DemoUtilsTest {
     @Test
     void checkNull() {
         // given
-        DemoUtils demoUtils = new DemoUtils();
+//        DemoUtils demoUtils = new DemoUtils();
 
         // when
         String str1 = null;
