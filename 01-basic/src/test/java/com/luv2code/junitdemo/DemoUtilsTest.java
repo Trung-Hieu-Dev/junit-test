@@ -30,7 +30,7 @@ class DemoUtilsTest {
         String str2 = "Hello World";
 
         // then
-        assertNull(str1, "Obj is null");
-        assertNotNull(str2, "Obj is not null");
+        assertNull(demoUtils.checkNull(str1), "Obj is null");
+        assertNotNull(demoUtils.checkNull(str2), "Obj is not null");
     }
 }
