@@ -9,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // @DisplayNameGeneration(DisplayNameGenerator.Simple.class) // create name automatically by removing parentheses of methods
 @DisplayNameGeneration(DisplayNameGenerator.IndicativeSentences.class) // auto create displayed name with <DemoUtilsTest> <methods name>
-@TestMethodOrder(MethodOrderer.DisplayName.class) // run test case order by displayed name
+//@TestMethodOrder(MethodOrderer.DisplayName.class) // run test case order by displayed name
+@TestMethodOrder(MethodOrderer.MethodName.class) // run test case order by method name
 class DemoUtilsTest {
     DemoUtils demoUtils;
 
