@@ -57,4 +57,12 @@ class DemoUtilsTest {
         assertTrue(demoUtils.isGreater(num1, num2), "num1 is greater than num2");
         assertFalse(demoUtils.isGreater(num2, num1), "num2 is not greater than num1");
     }
+
+    @Test
+    @DisplayName("Arrays equals") // compare arrays
+    void getFirstThreeLettersOfAlphabet() {
+        String[] myChars = {"A", "B", "C"};
+
+        assertArrayEquals(myChars, demoUtils.getFirstThreeLettersOfAlphabet(), "Arrays should be the same");
+    }
 }
