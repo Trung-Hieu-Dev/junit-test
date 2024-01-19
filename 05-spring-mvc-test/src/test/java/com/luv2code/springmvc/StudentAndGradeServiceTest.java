@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -32,7 +33,7 @@ public class StudentAndGradeServiceTest {
     JdbcTemplate jdbc;
 
     @BeforeEach
-    public void setupDB() {
+    public void setupDB() throws DataAccessException {
         jdbc.execute("insert into student(id, firstname, lastname, email_address) " +
                 "values (1, 'Kim', 'Brown', 'kim.brown@email.com')");
     }
