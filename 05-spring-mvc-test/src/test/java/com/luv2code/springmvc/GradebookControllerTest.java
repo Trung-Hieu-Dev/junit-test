@@ -4,6 +4,7 @@ import com.luv2code.springmvc.models.CollegeStudent;
 import com.luv2code.springmvc.repository.StudentDao;
 import com.luv2code.springmvc.service.StudentAndGradeService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.ModelAndViewAssert;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,9 +28,10 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -35,6 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 public class GradebookControllerTest {
+    public static MockHttpServletRequest request;
+
     @Autowired
     private JdbcTemplate jdbc;
 
@@ -46,6 +52,14 @@ public class GradebookControllerTest {
 
     @Mock
     private StudentAndGradeService service;
+
+    @BeforeAll
+    public static void setup() {
+        request = new MockHttpServletRequest();
+        request.setParameter("firstname", "Chad");
+        request.setParameter("lastname", "Darby");
+        request.setParameter("emailAddress", "chad_darby@rmail.com");
+    }
 
     @BeforeEach
     public void beforeEach() {
@@ -74,7 +88,7 @@ public class GradebookControllerTest {
         // Set up the mock service to return the test data
         when(service.getGradebook()).thenReturn(studentList);
 
-        // Send a GET request to the home page
+        // Send a GET request to the Gradebook controller
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -85,5 +99,31 @@ public class GradebookControllerTest {
         // check returned view is index or not
         ModelAndViewAssert.assertViewName(modelAndView, "index");
 
+    }
+
+    @Test
+    public void createStudentHttpRequest() throws Exception {
+        // Send a POST request to the Gradebook controller
+        MvcResult mvcResult = mockMvc.perform(post("/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("firstname", request.getParameterValues("firstname"))
+                .param("lastname", request.getParameterValues("lastname"))
+                .param("emailAddress", request.getParameterValues("emailAddress")))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        // get view and data
+        ModelAndView modelAndView = mvcResult.getModelAndView();
+
+        // check returned view is index or not
+        ModelAndViewAssert.assertViewName(modelAndView, "index");
+
+        // Check student was saved into DB or not
+        CollegeStudent verifyStudent = studentDao.findByEmailAddress("chad_darby@rmail.com");
+
+        assertNotNull(verifyStudent, "Student should be found");
+        assertEquals("chad_darby@rmail.com", verifyStudent.getEmailAddress());
+        assertEquals("Chad", verifyStudent.getFirstname());
+        assertEquals("Darby", verifyStudent.getLastname());
     }
 }
