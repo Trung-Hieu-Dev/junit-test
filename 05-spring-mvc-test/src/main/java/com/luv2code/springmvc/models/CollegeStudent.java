@@ -6,13 +6,14 @@ import javax.persistence.*;
 @Table(name = "student")
 public class CollegeStudent implements Student {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private int id;
-    @Column
+    @Column(name = "FIRSTNAME")
     private String firstname;
-    @Column
+    @Column(name = "LASTNAME")
     private String lastname;
-    @Column(name="email_address")
+    @Column(name="EMAIL_ADDRESS")
     private String emailAddress;
 
     public CollegeStudent() {

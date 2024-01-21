@@ -79,14 +79,11 @@ public class GradebookControllerTest {
         CollegeStudent student2 = new CollegeStudent("Mary", "Chad", "mary_chad@email.com");
         List<CollegeStudent> studentList = Arrays.asList(student1, student2);
 
-        // set service return expected data
+        // Set up the mock service to return the test data
         when(service.getGradebook()).thenReturn(studentList);
 
         // check returned data by service method is correct or not
         assertIterableEquals(studentList, service.getGradebook());
-
-        // Set up the mock service to return the test data
-        when(service.getGradebook()).thenReturn(studentList);
 
         // Send a GET request to the Gradebook controller
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/"))
@@ -103,6 +100,17 @@ public class GradebookControllerTest {
 
     @Test
     public void createStudentHttpRequest() throws Exception {
+        // test for making sure service can return data or not
+        CollegeStudent studentOne = new CollegeStudent("Eric", "Roby", "eric_roby@email.com");
+
+        List<CollegeStudent> studentList = new ArrayList<>(List.of(studentOne));
+
+        // Verify that getGradebook() is called once and set the return value
+        when(service.getGradebook()).thenReturn(studentList); // simulate that service.getGradebook() should return studentList
+        assertEquals(studentList, service.getGradebook()); // testing service.getGradebook() return studentList or not
+        verify(service, times(1)).getGradebook(); // testing .getGradebook() run as expected or not. If true, it should be run 1 times only!
+
+
         // Send a POST request to the Gradebook controller
         MvcResult mvcResult = mockMvc.perform(post("/")
                 .contentType(MediaType.APPLICATION_JSON)
