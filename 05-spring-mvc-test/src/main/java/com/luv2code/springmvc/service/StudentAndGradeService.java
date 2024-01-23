@@ -20,7 +20,7 @@ public class StudentAndGradeService {
 
     public void createStudent(String firstName, String lastname, String emailAddress) {
         CollegeStudent student = new CollegeStudent(firstName, lastname, emailAddress);
-//        student.setId(1); // only use for testing
+//        student.setId(1); // only use for testing create student
         studentDao.save(student);
     }
 
